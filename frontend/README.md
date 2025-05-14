@@ -1,84 +1,78 @@
-# React + Vite + TypeScript Template (react-vite-ts)
+# 🚗 Vehicle Booking Frontend
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Dan5py/react-vite-ts/blob/main/LICENSE)
+## 🧠 Thought Process Behind the Frontend
 
-A minimalistic template for kickstarting React projects with Vite and TypeScript.
+This frontend was built to provide a clean, minimal, and responsive user experience for booking a vehicle using a **step-by-step form flow**. The stack combines:
 
-## 🎉 Features
+- **React (TypeScript)** for building component-based UI
+- **Tailwind CSS** for utility-first styling
+- **Material UI (MUI)** for pre-built form components and theming
+- **Yup + React Hook Form** for form validation and handling
+- **Axios** for API communication
 
-- **React** - A JavaScript library for building user interfaces.
-- **Vite** - A fast, opinionated frontend build tool.
-- **TypeScript** - A typed superset of JavaScript that compiles to plain JavaScript.
-- **Tailwind CSS** - A utility-first CSS framework.
-- **Tailwind Prettier Plugin** - A Prettier plugin for formatting Tailwind CSS classes.
-- **ESLint** - A pluggable linting utility for JavaScript and TypeScript.
-- **PostCSS** - A tool for transforming CSS with JavaScript.
-- **Autoprefixer** - A PostCSS plugin to parse CSS and add vendor prefixes.
+### Flow Overview
 
-## ⚙️ Prerequisites
+1. **Splash Screen**  
+   Displays a basic text animation (placeholder for future enhancements) before loading the form interface.
 
-Make sure you have the following installed on your development machine:
+2. **Single Page Form Logic**  
+   All questions are stored as configuration in an object. Navigation between steps is handled internally, giving the illusion of page transitions while staying on the same route.
 
-- Node.js (version 16 or above)
-- Yarn (package manager)
+3. **Step-by-Step Breakdown**  
+   - **Step 1:** User enters First Name and Last Name → `Next`
+   - **Step 2:** Select Number of Wheels (2 or 4)  
+     - Triggers a **300ms debounce** on selection  
+     - Calls backend to fetch vehicle types
+     - Uses **cleanup logic** to reset state if the wheel count changes before fetch completes  
+   - **Step 3:** Vehicle Type selection (based on wheel count)  
+     - On selection, triggers API call to fetch vehicles of that type  
+     - Loader shown while data is being fetched  
+   - **Step 4:** Vehicle selection → `Next`
+   - **Step 5:** Select Start and End Dates  
+     - Uses a basic **from-to date picker**  
+     - On selection, applies a **400ms debounce** to allow last-minute changes  
+     - Backend is called to **check availability**  
+     - If not available, the Book button is disabled and a message is shown  
+     - Cleans up and resets the check when dates are changed again  
+   - **Step 6:** Final Booking  
+     - If dates are valid and vehicle is available, send the data to backend to **create a booking**
 
-## 🚀 Getting Started
+---
 
-Follow these steps to get started with the react-vite-ts template:
+## 🧱 Project Setup
 
-1. Clone the repository:
+### 📦 Install Dependencies
 
-   ```bash
-   git clone https://github.com/Dan5py/react-vite-ts.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd react-vite-ts
-   ```
-
-3. Install the dependencies:
-
-   ```bash
-    yarn
-   ```
-
-4. Start the development server:
-
-   ```bash
-   yarn dev
-   ```
-
-## 📜 Available Scripts
-
-- yarn dev - Starts the development server.
-- yarn build - Builds the production-ready code.
-- yarn lint - Runs ESLint to analyze and lint the code.
-- yarn preview - Starts the Vite development server in preview mode.
-
-## 📂 Project Structure
-
-The project structure follows a standard React application layout:
-
-```python
-react-vite-ts/
-  ├── node_modules/      # Project dependencies
-  ├── public/            # Public assets
-  ├── src/               # Application source code
-  │   ├── components/    # React components
-  │   ├── styles/        # CSS stylesheets
-  │   ├── lib/           # Utility functions
-  │   ├── App.tsx        # Application entry point
-  │   └── index.tsx      # Main rendering file
-  ├── .eslintrc.json     # ESLint configuration
-  ├── index.html         # HTML entry point
-  ├── postcss.config.js  # PostCSS configuration
-  ├── tailwind.config.js # Tailwind CSS configuration
-  ├── tsconfig.json      # TypeScript configuration
-  └── vite.config.ts     # Vite configuration
+```bash
+cd frontend
+yarn
 ```
 
-## 📄 License
+This installs all required dependencies including:
+- React + Typescript
+- Tailwind CSS
+- Material UI
+- React Hook Form
+- Yup
+- Axios
+- Day.js (for date formatting and handling)
 
-This project is licensed under the MIT License. See the [LICENSE](https://choosealicense.com/licenses/mit/) file for details.
+---
+
+## 🚀 Running the App
+
+To start the development server:
+
+```bash
+yarn dev
+```
+
+The app will be available at:
+
+```
+http://localhost:5173
+```
+
+Make sure your **backend is running** on the expected port (usually `http://localhost:5000`) so API requests can succeed.
+
+---
