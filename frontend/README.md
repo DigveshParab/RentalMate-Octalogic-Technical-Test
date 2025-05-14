@@ -7,7 +7,7 @@ This frontend was built to provide a clean, minimal, and responsive user experie
 - **React (TypeScript)** for building component-based UI
 - **Tailwind CSS** for utility-first styling
 - **Material UI (MUI)** for pre-built form components and theming
-- **Yup + React Hook Form** for form validation and handling
+- **Yup + Formik** for form validation and handling
 - **Axios** for API communication
 
 ### Flow Overview
