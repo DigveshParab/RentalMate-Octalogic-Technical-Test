@@ -1,19 +1,13 @@
 ## 🔧 Backend Setup
 
-### 1. Clone the Repository
 
-```bash
-git clone "https://github.com/DigveshParab/RentalMate-Octalogic-Technical-Test.git"
-cd RentalMate-Octalogic-Technical-Test/backend
-```
-
-### 2. Install Dependencies
+### 1. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Environment Setup
+### 2. Environment Setup
 
 Create a `.env` file in the root of the `backend` directory and add your database URL:
 
@@ -23,7 +17,7 @@ DATABASE_URL="your-neon-console-database-url"
 
 > 💡 The project uses [Neon](https://neon.tech/) for the PostgreSQL database.
 
-### 4. Run Migrations
+### 3. Run Migrations
 
 Generate the schema and apply it to your database:
 
@@ -31,17 +25,17 @@ Generate the schema and apply it to your database:
 npx prisma migrate dev --name init
 ```
 
-### 5. Generate Prisma Client
+### 4. Generate Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
-### 6. Verify Tables
+### 5. Verify Tables
 
 Check your [Neon Console](https://console.neon.tech/) to verify that the tables were created successfully.
 
-### 7. Seed the Database
+### 6. Seed the Database
 
 Run the seeding script to populate initial data:
 
@@ -51,7 +45,7 @@ npx ts-node src/seed.ts
 
 Confirm that the data appears in your DB.
 
-### 8. Build the Project
+### 7. Build the Project
 
 Compile TypeScript to JavaScript:
 
@@ -59,7 +53,7 @@ Compile TypeScript to JavaScript:
 tsc -b
 ```
 
-### 9. Start the Server
+### 8. Start the Server
 
 ```bash
 node dist/index.js
