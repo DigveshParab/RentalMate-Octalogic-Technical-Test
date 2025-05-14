@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model VehicleType {
+  id Int @id @default(autoincrement())
+  type String
+  wheels Int
+  vehicles  Vehicle[] // under one vehicle type there can be multiple vehicles (one-to-many)
+}
+
+model Vehicle{
+  id Int @id @default(autoincrement())
+  name String
+  vehicleTypeId Int // refrences VehicleType.id
+  vehicleType VehicleType @relation(fields: [vehicleTypeId],references: [id])  // more than one vehicle can have the same type (many-to-one)
+  bookings Booking[] // one vechicle can have multiple bookings provided they don't overlap (one-to-many)
+}
+
+model Booking{
+  id Int @id @default(autoincrement())
+  name String
+  startDate DateTime
+  endDate DateTime
+  vehicleleId Int // refrences Vehicle.id
+  vehicle Vehicle @relation(fields: [vehicleleId], references: [id]) // each booking is associated to one vehicle (one-to-one)
+}
